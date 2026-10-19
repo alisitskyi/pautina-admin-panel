@@ -1,0 +1,435 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <!--        <meta name="viewport" content="width=device-width, initial-scale=1">-->
+        <meta name="csrf-param" content="_csrf">
+    <meta name="csrf-token" content="UlktNW5wYzJnCRV3KjIGZygLYnYIEycFMR1ZUAFCMUAjEB9PXiRURg==">
+        <title></title>
+        <link href="/assets/ef4993b2/css/bootstrap.css" rel="stylesheet">
+<link href="/css/site.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+<link href="/assets/3378dcfc/dist/css/timeline.css" rel="stylesheet">
+<link href="/assets/3378dcfc/dist/css/sb-admin-2.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/morrisjs/morris.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/3378dcfc/dropzone.css" rel="stylesheet">
+<link href="/assets/3378dcfc/datetime/DateTimePicker.css" rel="stylesheet">
+<link href="/assets/3378dcfc/datetime/DateTimePicker-ltie9.css" rel="stylesheet">        <script src="/ckeditor/ckeditor.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="/css/ext_admin.css">
+    </head>
+    <body style="overflow-y: scroll; min-width: 1280px;">
+                <div class="alert" id="info-alert"></div>
+        <script>
+            function showAlert(message, className, autoHide)
+            {
+                $("#info-alert").html(message);
+                $("#info-alert").removeClass('alert-danger alert-success alert-info alert-warning');
+                $("#info-alert").addClass(className);
+                $("#info-alert").fadeIn();
+                if (autoHide)
+                {
+                    window.setTimeout(function () {
+                        $("#info-alert").fadeToggle(1500);
+                    }, 3000);
+                }
+            }
+            function HideAlert()
+            {
+                $("#info-alert").fadeToggle(500);
+            }
+        </script>
+        <div id="wrapper">
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="/admin">[Anton - Anton]</a>
+                </div>
+                <!-- /.navbar-header -->
+
+                <ul class="nav navbar-top-links navbar-right">
+
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="/admin/profile"><i class="fa fa-user fa-fw"></i> Профиль</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/site/logout"><i class="fa fa-sign-out fa-fw"></i> Выйти</a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+                <!-- /.navbar-top-links -->
+
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu" style="padding-top: 9px;">
+
+                            <li>
+                                <a href="/admin/times"><i class="fa fa-calendar fa-fw"></i>Расписание</a>
+                            </li>
+                            
+
+                            <li>
+                                <a href="/admin/rules"><i class="fa fa-calendar fa-fw"></i>Правила</a>
+                            </li>
+
+
+                            <li>
+                                <a href="/admin/booking"><i class="fa fa fa-flag-o fa-fw"></i>Брони</a>
+                            </li>
+
+                            <li>
+                                <a href="/admin/gallery"><i class="fa fa fa-picture-o fa-fw"></i>Галерея</a>
+                            </li>
+
+                                                    </ul>
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+                <!-- /.navbar-static-side -->
+            </nav>
+
+            <div id="page-wrapper">
+                
+<div style="display: none;" id='yi2-token'>UlktNW5wYzJnCRV3KjIGZygLYnYIEycFMR1ZUAFCMUAjEB9PXiRURg==</div>      
+<div class="rooms-wrap">
+    <div class="col-md-12">
+
+
+        <div style="margin-bottom: 10px;">
+
+
+            <form method="post" enctype="multipart/form-data">
+                 <input type="hidden" name='_csrf' value="UlktNW5wYzJnCRV3KjIGZygLYnYIEycFMR1ZUAFCMUAjEB9PXiRURg==">
+            <input name="photo" type="file" />
+             <button class="btn btn-info" type="submit">Загрузить</button>
+            </form>
+            
+            
+<!--            <button class="btn btn-info" style="width:300px;" onclick="loadFiles('imagefile', 'photo-gallery')" type="button">
+                Выбрать фото
+            </button>-->
+
+
+        </div>
+
+        <div style="margin-bottom: 10px;">
+            <form method="post">
+                <input type="hidden" name='_csrf' value="UlktNW5wYzJnCRV3KjIGZygLYnYIEycFMR1ZUAFCMUAjEB9PXiRURg==">
+                <input id='img-name' type="hidden" name="img_name" value="">
+                <button type="submit" class="btn btn-primary" id="save-photo" style="display:none;">Сохранить в галерею</button>
+                <button type="button" class="btn btn-danger" id="cencel-photo" style="display:none;">Отмена</button>
+            </form>
+        </div>
+        <div style="margin-bottom: 10px;">
+            <img src="" id="photo-gallery-mini" width="150px"/>
+            <label class="inline-labels" style="display:none;">Ширина: <span id='w'></span>;</label>
+            <label class="inline-labels" style="display:none;">Высота: <span id='h'></span>;</label>
+            <button type="button" class="btn btn-success" id="crop" style="display:none;">Изменить превью-фото</button>
+        </div>
+        <div>
+            <img src="" id="photo-gallery"/>
+        </div>
+
+
+
+        <div style="margin-top: 10px;">
+            
+                         <form method="post">   
+                  <input type="hidden" name='_csrf' value="UlktNW5wYzJnCRV3KjIGZygLYnYIEycFMR1ZUAFCMUAjEB9PXiRURg==">
+                <button class="btn btn-info" type="submit">Сохранить изминения сортировки</button>
+                         
+            <div style="margin-bottom: 5px;">
+                                <input type="number" name="new_sort[0_____8557_original.jpg]" value="0">
+                <img src="/gallery/main/0_____8557_original.jpg" width="300px"/>
+                <img src="/gallery/main/0_____8557_original.jpg?3627" width="150"/>
+                 <button type="button" data-mini="/gallery/main/0_____8557_original.jpg" data-main="/gallery/main/0_____8557_original.jpg" class="btn btn-success resize-mini">Изменить превью-фото</button>
+                 <a href="/admin/gallery/?min=%2Fgallery%2Fmain%2F0_____8557_original.jpg&main=%2Fgallery%2Fmain%2F0_____8557_original.jpg">
+                 <button type="button" class="btn btn-danger">Удалить</button>
+            </a> 
+            </div>
+              
+            
+                         
+            <div style="margin-bottom: 5px;">
+                                <input type="number" name="new_sort[1___IMG_25.jpg]" value="1">
+                <img src="/gallery/main/1___IMG_25.jpg" width="300px"/>
+                <img src="/gallery/main/1___IMG_25.jpg?952" width="150"/>
+                 <button type="button" data-mini="/gallery/main/1___IMG_25.jpg" data-main="/gallery/main/1___IMG_25.jpg" class="btn btn-success resize-mini">Изменить превью-фото</button>
+                 <a href="/admin/gallery/?min=%2Fgallery%2Fmain%2F1___IMG_25.jpg&main=%2Fgallery%2Fmain%2F1___IMG_25.jpg">
+                 <button type="button" class="btn btn-danger">Удалить</button>
+            </a> 
+            </div>
+              
+            
+                         
+            <div style="margin-bottom: 5px;">
+                                <input type="number" name="new_sort[2____берлиоз.jpg]" value="2">
+                <img src="/gallery/main/2____берлиоз.jpg" width="300px"/>
+                <img src="/gallery/main/2____берлиоз.jpg?6336" width="150"/>
+                 <button type="button" data-mini="/gallery/main/2____берлиоз.jpg" data-main="/gallery/main/2____берлиоз.jpg" class="btn btn-success resize-mini">Изменить превью-фото</button>
+                 <a href="/admin/gallery/?min=%2Fgallery%2Fmain%2F2____%D0%B1%D0%B5%D1%80%D0%BB%D0%B8%D0%BE%D0%B7.jpg&main=%2Fgallery%2Fmain%2F2____%D0%B1%D0%B5%D1%80%D0%BB%D0%B8%D0%BE%D0%B7.jpg">
+                 <button type="button" class="btn btn-danger">Удалить</button>
+            </a> 
+            </div>
+              
+            
+                         
+            <div style="margin-bottom: 5px;">
+                                <input type="number" name="new_sort[4______kniga_ramka.jpg]" value="4">
+                <img src="/gallery/main/4______kniga_ramka.jpg" width="300px"/>
+                <img src="/gallery/main/4______kniga_ramka.jpg?4008" width="150"/>
+                 <button type="button" data-mini="/gallery/main/4______kniga_ramka.jpg" data-main="/gallery/main/4______kniga_ramka.jpg" class="btn btn-success resize-mini">Изменить превью-фото</button>
+                 <a href="/admin/gallery/?min=%2Fgallery%2Fmain%2F4______kniga_ramka.jpg&main=%2Fgallery%2Fmain%2F4______kniga_ramka.jpg">
+                 <button type="button" class="btn btn-danger">Удалить</button>
+            </a> 
+            </div>
+              
+            
+                         
+            <div style="margin-bottom: 5px;">
+                                <input type="number" name="new_sort[7_________IMG-9-.jpg]" value="7">
+                <img src="/gallery/main/7_________IMG-9-.jpg" width="300px"/>
+                <img src="/gallery/main/7_________IMG-9-.jpg?1430" width="150"/>
+                 <button type="button" data-mini="/gallery/main/7_________IMG-9-.jpg" data-main="/gallery/main/7_________IMG-9-.jpg" class="btn btn-success resize-mini">Изменить превью-фото</button>
+                 <a href="/admin/gallery/?min=%2Fgallery%2Fmain%2F7_________IMG-9-.jpg&main=%2Fgallery%2Fmain%2F7_________IMG-9-.jpg">
+                 <button type="button" class="btn btn-danger">Удалить</button>
+            </a> 
+            </div>
+              
+            
+                         
+            <div style="margin-bottom: 5px;">
+                                <input type="number" name="new_sort[9___________ramka_Addams.jpg]" value="9">
+                <img src="/gallery/main/9___________ramka_Addams.jpg" width="300px"/>
+                <img src="/gallery/main/9___________ramka_Addams.jpg?920" width="150"/>
+                 <button type="button" data-mini="/gallery/main/9___________ramka_Addams.jpg" data-main="/gallery/main/9___________ramka_Addams.jpg" class="btn btn-success resize-mini">Изменить превью-фото</button>
+                 <a href="/admin/gallery/?min=%2Fgallery%2Fmain%2F9___________ramka_Addams.jpg&main=%2Fgallery%2Fmain%2F9___________ramka_Addams.jpg">
+                 <button type="button" class="btn btn-danger">Удалить</button>
+            </a> 
+            </div>
+              
+            
+                         
+            <div style="margin-bottom: 5px;">
+                                <input type="number" name="new_sort[15______________________n.jpg]" value="15">
+                <img src="/gallery/main/15______________________n.jpg" width="300px"/>
+                <img src="/gallery/main/15______________________n.jpg?9959" width="150"/>
+                 <button type="button" data-mini="/gallery/main/15______________________n.jpg" data-main="/gallery/main/15______________________n.jpg" class="btn btn-success resize-mini">Изменить превью-фото</button>
+                 <a href="/admin/gallery/?min=%2Fgallery%2Fmain%2F15______________________n.jpg&main=%2Fgallery%2Fmain%2F15______________________n.jpg">
+                 <button type="button" class="btn btn-danger">Удалить</button>
+            </a> 
+            </div>
+              
+            
+                         
+            <div style="margin-bottom: 5px;">
+                                <input type="number" name="new_sort[16_________________________n.jpg]" value="16">
+                <img src="/gallery/main/16_________________________n.jpg" width="300px"/>
+                <img src="/gallery/main/16_________________________n.jpg?396" width="150"/>
+                 <button type="button" data-mini="/gallery/main/16_________________________n.jpg" data-main="/gallery/main/16_________________________n.jpg" class="btn btn-success resize-mini">Изменить превью-фото</button>
+                 <a href="/admin/gallery/?min=%2Fgallery%2Fmain%2F16_________________________n.jpg&main=%2Fgallery%2Fmain%2F16_________________________n.jpg">
+                 <button type="button" class="btn btn-danger">Удалить</button>
+            </a> 
+            </div>
+              
+            
+                         
+            <div style="margin-bottom: 5px;">
+                                <input type="number" name="new_sort[17___________________________n.jpg]" value="17">
+                <img src="/gallery/main/17___________________________n.jpg" width="300px"/>
+                <img src="/gallery/main/17___________________________n.jpg?2285" width="150"/>
+                 <button type="button" data-mini="/gallery/main/17___________________________n.jpg" data-main="/gallery/main/17___________________________n.jpg" class="btn btn-success resize-mini">Изменить превью-фото</button>
+                 <a href="/admin/gallery/?min=%2Fgallery%2Fmain%2F17___________________________n.jpg&main=%2Fgallery%2Fmain%2F17___________________________n.jpg">
+                 <button type="button" class="btn btn-danger">Удалить</button>
+            </a> 
+            </div>
+              
+            
+                         
+            <div style="margin-bottom: 5px;">
+                                <input type="number" name="new_sort[21__________________________________IMG_.jpg]" value="21">
+                <img src="/gallery/main/21__________________________________IMG_.jpg" width="300px"/>
+                <img src="/gallery/main/21__________________________________IMG_.jpg?8846" width="150"/>
+                 <button type="button" data-mini="/gallery/main/21__________________________________IMG_.jpg" data-main="/gallery/main/21__________________________________IMG_.jpg" class="btn btn-success resize-mini">Изменить превью-фото</button>
+                 <a href="/admin/gallery/?min=%2Fgallery%2Fmain%2F21__________________________________IMG_.jpg&main=%2Fgallery%2Fmain%2F21__________________________________IMG_.jpg">
+                 <button type="button" class="btn btn-danger">Удалить</button>
+            </a> 
+            </div>
+              
+            
+                         
+            <div style="margin-bottom: 5px;">
+                                <input type="number" name="new_sort[27___________________________________________.jpg]" value="27">
+                <img src="/gallery/main/27___________________________________________.jpg" width="300px"/>
+                <img src="/gallery/main/27___________________________________________.jpg?8675" width="150"/>
+                 <button type="button" data-mini="/gallery/main/27___________________________________________.jpg" data-main="/gallery/main/27___________________________________________.jpg" class="btn btn-success resize-mini">Изменить превью-фото</button>
+                 <a href="/admin/gallery/?min=%2Fgallery%2Fmain%2F27___________________________________________.jpg&main=%2Fgallery%2Fmain%2F27___________________________________________.jpg">
+                 <button type="button" class="btn btn-danger">Удалить</button>
+            </a> 
+            </div>
+              
+            
+                         
+            <div style="margin-bottom: 5px;">
+                                <input type="number" name="new_sort[32___________________________________________________________n.jpg]" value="32">
+                <img src="/gallery/main/32___________________________________________________________n.jpg" width="300px"/>
+                <img src="/gallery/main/32___________________________________________________________n.jpg?6209" width="150"/>
+                 <button type="button" data-mini="/gallery/main/32___________________________________________________________n.jpg" data-main="/gallery/main/32___________________________________________________________n.jpg" class="btn btn-success resize-mini">Изменить превью-фото</button>
+                 <a href="/admin/gallery/?min=%2Fgallery%2Fmain%2F32___________________________________________________________n.jpg&main=%2Fgallery%2Fmain%2F32___________________________________________________________n.jpg">
+                 <button type="button" class="btn btn-danger">Удалить</button>
+            </a> 
+            </div>
+              
+            
+                         
+            <div style="margin-bottom: 5px;">
+                                <input type="number" name="new_sort[35__________________________________________________________________________n.jpg]" value="35">
+                <img src="/gallery/main/35__________________________________________________________________________n.jpg" width="300px"/>
+                <img src="/gallery/main/35__________________________________________________________________________n.jpg?5587" width="150"/>
+                 <button type="button" data-mini="/gallery/main/35__________________________________________________________________________n.jpg" data-main="/gallery/main/35__________________________________________________________________________n.jpg" class="btn btn-success resize-mini">Изменить превью-фото</button>
+                 <a href="/admin/gallery/?min=%2Fgallery%2Fmain%2F35__________________________________________________________________________n.jpg&main=%2Fgallery%2Fmain%2F35__________________________________________________________________________n.jpg">
+                 <button type="button" class="btn btn-danger">Удалить</button>
+            </a> 
+            </div>
+              
+            
+                                <button class="btn btn-info" type="submit">Сохранить изминения сортировки</button>
+            </form>    
+                        
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/imgareaselect/js/jquery.Jcrop.min.js"></script>
+<script src="/imgareaselect/js/crop.js"></script>
+
+<link rel="stylesheet" href="/imgareaselect/css/jquery.Jcrop.css" type="text/css" />
+<style type="text/css">
+    #crop{
+        display:none;
+    }
+    #cropresult{
+        border:2px solid #ddd;
+    }
+    .mini{
+        margin:5px;
+    }
+</style>
+
+            </div>
+            <!-- /#page-wrapper -->
+        </div>
+        <div id="myModalBox" class="modal fade">
+            <div class="modal-dialog mymodel">
+                <div class="modal-content mymodel">
+                    <!-- Заголовок модального окна -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">File manager</h4>
+                        <div class="uploadfile">
+                            <h5>Загрузить новый файл</h5>
+                            <form id="myId" class="dropzone">
+                                <input type="hidden" name="_csrf" value="UlktNW5wYzJnCRV3KjIGZygLYnYIEycFMR1ZUAFCMUAjEB9PXiRURg==" />
+                            </form>
+                        </div>
+                    </div>
+                    <h4 style="width: 100%;text-align: center;">Выбрать на сервере</h4 style>
+                    <!-- Основное содержимое модального окна -->
+                    <div class="modal-body mymodel" id='modalContent'>
+
+                    </div>
+                    <!-- Футер модального окна -->
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $('.confirms').click(function (event) {
+                    var url = event.toElement.href;
+                    showAlert('Подтвердите удаление <a class="btn btn-danger" href="' + url + '">Удалить</a> <button onclick="HideAlert()" class="btn btn-default">Отмена</button>', 'alert-warning');
+                    return false;
+                });
+            });
+            var inp = null;
+            var fill = null;
+            function loadFiles(inputid, fillImg,dir) {
+                inp = inputid;
+                fill = fillImg;
+                var url = "/admin/default/files";
+                if (dir)
+                    url = url+'?dir='+dir;
+                $.post(url, {_csrf: "UlktNW5wYzJnCRV3KjIGZygLYnYIEycFMR1ZUAFCMUAjEB9PXiRURg=="})
+                        .done(function (data) {
+                            // download images to modal window
+                            images = JSON.parse(data);
+                            $("#myModalBox #modalContent").children().remove();
+                            for (var i = 0; i < images.length; i++) {
+                                $("#modalContent").append("<img src='/" + images[i] + "' width='100' height='100'\n\
+             onclick='fileSelect(\"" + images[i] + "\", \"" + inputid + "\", \"" + fillImg + "\")' class='imgmanager'>");
+                            }
+                        });
+                $("#myModalBox").modal('show');
+            }
+            function fileSelect(path, inputid, fillImg) {
+                $("#" + inputid).val('/' + path);
+                $("#myModalBox").modal('hide');
+                $('#myModalBox .imgmanager').remove();
+                $("#" + fillImg).attr('src', "/" + path);
+                if ($('#photo-gallery')) {
+                    resetJcrop();
+                }
+
+            }
+        </script>
+        <script src="/assets/3e227f6f/jquery.js"></script>
+<script src="/assets/64c67b80/yii.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
+<script src="/assets/3378dcfc/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<script src="/assets/3378dcfc/js/dropzone.js"></script>
+<script src="/assets/3378dcfc/dist/js/sb-admin-2.js"></script>
+<script src="/assets/3378dcfc/ckeditor/ckeditor.js"></script>
+<script src="/assets/3378dcfc/datetime/DateTimePicker.js"></script>
+<script src="/assets/3378dcfc/datetime/DateTimePicker-ltie9.js"></script>
+<script src="/assets/3378dcfc/js/js.js"></script>        <script>
+            //$("form#myId").dropzone({ url: "/admin/default/upload", paramName:"UploadForm[imageFile]"});
+            var myDropzone = new Dropzone("form#myId", {url: "/admin/default/upload", paramName: "UploadForm[imageFile]"});
+            myDropzone.on("success", function () {
+                loadFiles(inp, fill);
+            });
+        </script>
+
+                
+    </body>
+</html>

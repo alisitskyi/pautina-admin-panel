@@ -1,0 +1,380 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <!--        <meta name="viewport" content="width=device-width, initial-scale=1">-->
+        <meta name="csrf-param" content="_csrf">
+    <meta name="csrf-token" content="UUpqbWVvMWNkGlIvIS1UNisYJS4DDHVUMg4eCApdYxEgA1gXVTsGFw==">
+        <title>Настройки профиля</title>
+        <link href="/assets/ef4993b2/css/bootstrap.css" rel="stylesheet">
+<link href="/css/site.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+<link href="/assets/3378dcfc/dist/css/timeline.css" rel="stylesheet">
+<link href="/assets/3378dcfc/dist/css/sb-admin-2.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/morrisjs/morris.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/3378dcfc/dropzone.css" rel="stylesheet">
+<link href="/assets/3378dcfc/datetime/DateTimePicker.css" rel="stylesheet">
+<link href="/assets/3378dcfc/datetime/DateTimePicker-ltie9.css" rel="stylesheet">        <script src="/ckeditor/ckeditor.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="/css/ext_admin.css">
+    </head>
+    <body style="overflow-y: scroll; min-width: 1280px;">
+                <div class="alert" id="info-alert"></div>
+        <script>
+            function showAlert(message, className, autoHide)
+            {
+                $("#info-alert").html(message);
+                $("#info-alert").removeClass('alert-danger alert-success alert-info alert-warning');
+                $("#info-alert").addClass(className);
+                $("#info-alert").fadeIn();
+                if (autoHide)
+                {
+                    window.setTimeout(function () {
+                        $("#info-alert").fadeToggle(1500);
+                    }, 3000);
+                }
+            }
+            function HideAlert()
+            {
+                $("#info-alert").fadeToggle(500);
+            }
+        </script>
+        <div id="wrapper">
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="/admin">[Anton - Anton]</a>
+                </div>
+                <!-- /.navbar-header -->
+
+                <ul class="nav navbar-top-links navbar-right">
+
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="/admin/profile"><i class="fa fa-user fa-fw"></i> Профиль</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/site/logout"><i class="fa fa-sign-out fa-fw"></i> Выйти</a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+                <!-- /.navbar-top-links -->
+
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu" style="padding-top: 9px;">
+
+                            <li>
+                                <a href="/admin/times"><i class="fa fa-calendar fa-fw"></i>Расписание</a>
+                            </li>
+                            
+
+                            <li>
+                                <a href="/admin/rules"><i class="fa fa-calendar fa-fw"></i>Правила</a>
+                            </li>
+
+
+                            <li>
+                                <a href="/admin/booking"><i class="fa fa fa-flag-o fa-fw"></i>Брони</a>
+                            </li>
+
+                            <li>
+                                <a href="/admin/gallery"><i class="fa fa fa-picture-o fa-fw"></i>Галерея</a>
+                            </li>
+
+                                                    </ul>
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+                <!-- /.navbar-static-side -->
+            </nav>
+
+            <div id="page-wrapper">
+                <h2>Настройки профиля Anton</h2>
+<div class="profile-form">
+    <form id="w0" action="/admin/profile/update" method="post">
+<input type="hidden" name="_csrf" value="UUpqbWVvMWNkGlIvIS1UNisYJS4DDHVUMg4eCApdYxEgA1gXVTsGFw==">
+    <div class="form-group field-user-name">
+<label class="control-label" for="user-name">Имя</label>
+<input type="text" id="user-name" class="form-control" name="User[name]" value="Anton">
+
+<div class="help-block"></div>
+</div>
+    <div class="form-group field-user-email">
+<label class="control-label" for="user-email">Email</label>
+<input type="text" id="user-email" class="form-control" name="User[email]" value="lisitskyi@gmail.com">
+
+<div class="help-block"></div>
+</div>
+    <div class="form-group field-user-phone">
+<label class="control-label" for="user-phone">Телефон</label>
+<input type="text" id="user-phone" class="form-control" name="User[phone]" value="380952884281">
+
+<div class="help-block"></div>
+</div>
+    <div class="form-group">
+        <label>Новый пароль</label>
+        <input type="password" name="User[password]" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Подтверждение пароля пароль</label>
+        <input type="password" name="User[password_confirm]" class="form-control" />
+    </div>
+
+    <h3>Настройки уведомлений (получать уведомления со следующих комнат)</h3>
+            <div class="form-group">
+            <label for="notify-checkbox14">HOTEL HOGVARTS </label>
+            <input type="checkbox" id="notify-checkbox14" name="Notifications[14]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox29">ДРАКУЛА</label>
+            <input type="checkbox" id="notify-checkbox29" name="Notifications[29]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox8">ВТЕЧА \ ПОБЕГ</label>
+            <input type="checkbox" id="notify-checkbox8" name="Notifications[8]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox11">ВОНО</label>
+            <input type="checkbox" id="notify-checkbox11" name="Notifications[11]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox44">Гаррі Поттер Таємниця Крестражу</label>
+            <input type="checkbox" id="notify-checkbox44" name="Notifications[44]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox7">Голова Берлиоза</label>
+            <input type="checkbox" id="notify-checkbox7" name="Notifications[7]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox22">Гаррі Поттер і Таємна кімната</label>
+            <input type="checkbox" id="notify-checkbox22" name="Notifications[22]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox28">Міністерство Магії</label>
+            <input type="checkbox" id="notify-checkbox28" name="Notifications[28]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox9">МУМІЯ</label>
+            <input type="checkbox" id="notify-checkbox9" name="Notifications[9]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox46">ХОББІТ</label>
+            <input type="checkbox" id="notify-checkbox46" name="Notifications[46]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox17">Загублені у космосі</label>
+            <input type="checkbox" id="notify-checkbox17" name="Notifications[17]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox6">Книга мертвых.</label>
+            <input type="checkbox" id="notify-checkbox6" name="Notifications[6]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox43">ДЖУМАНДЖИ</label>
+            <input type="checkbox" id="notify-checkbox43" name="Notifications[43]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox21">ЧУЖІ</label>
+            <input type="checkbox" id="notify-checkbox21" name="Notifications[21]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox33">ДЖУНГЛІ</label>
+            <input type="checkbox" id="notify-checkbox33" name="Notifications[33]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox24">Гаррі Поттер та Маховик часу</label>
+            <input type="checkbox" id="notify-checkbox24" name="Notifications[24]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox38">ЦИРК ЖАХІВ</label>
+            <input type="checkbox" id="notify-checkbox38" name="Notifications[38]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox49">СЯЙВ0 / СИЯНИЕ</label>
+            <input type="checkbox" id="notify-checkbox49" name="Notifications[49]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox12">Полтергейст. Будинок с привідом</label>
+            <input type="checkbox" id="notify-checkbox12" name="Notifications[12]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox20">Вигнання/Изгнание </label>
+            <input type="checkbox" id="notify-checkbox20" name="Notifications[20]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox40">ТАРО: Карта смерті</label>
+            <input type="checkbox" id="notify-checkbox40" name="Notifications[40]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox37">МОРГ: мітка на тілі</label>
+            <input type="checkbox" id="notify-checkbox37" name="Notifications[37]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox36">ДЕМОНИ ДОМУ УОРРЕН</label>
+            <input type="checkbox" id="notify-checkbox36" name="Notifications[36]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox39">Поворот не туда</label>
+            <input type="checkbox" id="notify-checkbox39" name="Notifications[39]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox23">Аннабель</label>
+            <input type="checkbox" id="notify-checkbox23" name="Notifications[23]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox50">Техаська різанина</label>
+            <input type="checkbox" id="notify-checkbox50" name="Notifications[50]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox31">ЕКЗОРЦИСТИ</label>
+            <input type="checkbox" id="notify-checkbox31" name="Notifications[31]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox34">АСТРАЛ</label>
+            <input type="checkbox" id="notify-checkbox34" name="Notifications[34]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox35">9 кругов АДА</label>
+            <input type="checkbox" id="notify-checkbox35" name="Notifications[35]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox52">Кровава Мері</label>
+            <input type="checkbox" id="notify-checkbox52" name="Notifications[52]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox30">Прокляття монахіні</label>
+            <input type="checkbox" id="notify-checkbox30" name="Notifications[30]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox32">Загробний світ</label>
+            <input type="checkbox" id="notify-checkbox32" name="Notifications[32]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox13">Семейка Аддамс</label>
+            <input type="checkbox" id="notify-checkbox13" name="Notifications[13]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox16">ЛАБИРИНТ</label>
+            <input type="checkbox" id="notify-checkbox16" name="Notifications[16]"  />
+        </div>
+            <div class="form-group">
+            <label for="notify-checkbox3">ПРОГРАМИ НА ДЕНЬ НАРОДЖЕННЯ</label>
+            <input type="checkbox" id="notify-checkbox3" name="Notifications[3]"  />
+        </div>
+    
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Сохранить</button>        <a class="btn btn-warning" href="/admin">Отменить</a>    </div>
+    </form>
+</div>            </div>
+            <!-- /#page-wrapper -->
+        </div>
+        <div id="myModalBox" class="modal fade">
+            <div class="modal-dialog mymodel">
+                <div class="modal-content mymodel">
+                    <!-- Заголовок модального окна -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">File manager</h4>
+                        <div class="uploadfile">
+                            <h5>Загрузить новый файл</h5>
+                            <form id="myId" class="dropzone">
+                                <input type="hidden" name="_csrf" value="UUpqbWVvMWNkGlIvIS1UNisYJS4DDHVUMg4eCApdYxEgA1gXVTsGFw==" />
+                            </form>
+                        </div>
+                    </div>
+                    <h4 style="width: 100%;text-align: center;">Выбрать на сервере</h4 style>
+                    <!-- Основное содержимое модального окна -->
+                    <div class="modal-body mymodel" id='modalContent'>
+
+                    </div>
+                    <!-- Футер модального окна -->
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $('.confirms').click(function (event) {
+                    var url = event.toElement.href;
+                    showAlert('Подтвердите удаление <a class="btn btn-danger" href="' + url + '">Удалить</a> <button onclick="HideAlert()" class="btn btn-default">Отмена</button>', 'alert-warning');
+                    return false;
+                });
+            });
+            var inp = null;
+            var fill = null;
+            function loadFiles(inputid, fillImg,dir) {
+                inp = inputid;
+                fill = fillImg;
+                var url = "/admin/default/files";
+                if (dir)
+                    url = url+'?dir='+dir;
+                $.post(url, {_csrf: "UUpqbWVvMWNkGlIvIS1UNisYJS4DDHVUMg4eCApdYxEgA1gXVTsGFw=="})
+                        .done(function (data) {
+                            // download images to modal window
+                            images = JSON.parse(data);
+                            $("#myModalBox #modalContent").children().remove();
+                            for (var i = 0; i < images.length; i++) {
+                                $("#modalContent").append("<img src='/" + images[i] + "' width='100' height='100'\n\
+             onclick='fileSelect(\"" + images[i] + "\", \"" + inputid + "\", \"" + fillImg + "\")' class='imgmanager'>");
+                            }
+                        });
+                $("#myModalBox").modal('show');
+            }
+            function fileSelect(path, inputid, fillImg) {
+                $("#" + inputid).val('/' + path);
+                $("#myModalBox").modal('hide');
+                $('#myModalBox .imgmanager').remove();
+                $("#" + fillImg).attr('src', "/" + path);
+                if ($('#photo-gallery')) {
+                    resetJcrop();
+                }
+
+            }
+        </script>
+        <script src="/assets/3e227f6f/jquery.js"></script>
+<script src="/assets/64c67b80/yii.js"></script>
+<script src="/assets/64c67b80/yii.activeForm.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
+<script src="/assets/3378dcfc/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<script src="/assets/3378dcfc/js/dropzone.js"></script>
+<script src="/assets/3378dcfc/dist/js/sb-admin-2.js"></script>
+<script src="/assets/3378dcfc/ckeditor/ckeditor.js"></script>
+<script src="/assets/3378dcfc/datetime/DateTimePicker.js"></script>
+<script src="/assets/3378dcfc/datetime/DateTimePicker-ltie9.js"></script>
+<script src="/assets/3378dcfc/js/js.js"></script>
+<script type="text/javascript">jQuery(document).ready(function () {
+jQuery('#w0').yiiActiveForm([], []);
+});</script>        <script>
+            //$("form#myId").dropzone({ url: "/admin/default/upload", paramName:"UploadForm[imageFile]"});
+            var myDropzone = new Dropzone("form#myId", {url: "/admin/default/upload", paramName: "UploadForm[imageFile]"});
+            myDropzone.on("success", function () {
+                loadFiles(inp, fill);
+            });
+        </script>
+
+                
+    </body>
+</html>

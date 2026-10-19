@@ -1,0 +1,531 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <!--        <meta name="viewport" content="width=device-width, initial-scale=1">-->
+        <meta name="csrf-param" content="_csrf">
+    <meta name="csrf-token" content="NE1TbHpoWEsBHWsuPio9Hk4fHC8cCxx8VwknCRVaCjlFBGEWSjxvPw==">
+        <title>Правила</title>
+        <link href="/assets/ef4993b2/css/bootstrap.css" rel="stylesheet">
+<link href="/css/site.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+<link href="/assets/3378dcfc/dist/css/timeline.css" rel="stylesheet">
+<link href="/assets/3378dcfc/dist/css/sb-admin-2.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/morrisjs/morris.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/3378dcfc/dropzone.css" rel="stylesheet">
+<link href="/assets/3378dcfc/datetime/DateTimePicker.css" rel="stylesheet">
+<link href="/assets/3378dcfc/datetime/DateTimePicker-ltie9.css" rel="stylesheet">        <script src="/ckeditor/ckeditor.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="/css/ext_admin.css">
+    </head>
+    <body style="overflow-y: scroll; min-width: 1280px;">
+                <div class="alert" id="info-alert"></div>
+        <script>
+            function showAlert(message, className, autoHide)
+            {
+                $("#info-alert").html(message);
+                $("#info-alert").removeClass('alert-danger alert-success alert-info alert-warning');
+                $("#info-alert").addClass(className);
+                $("#info-alert").fadeIn();
+                if (autoHide)
+                {
+                    window.setTimeout(function () {
+                        $("#info-alert").fadeToggle(1500);
+                    }, 3000);
+                }
+            }
+            function HideAlert()
+            {
+                $("#info-alert").fadeToggle(500);
+            }
+        </script>
+        <div id="wrapper">
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="/admin">[Anton - Anton]</a>
+                </div>
+                <!-- /.navbar-header -->
+
+                <ul class="nav navbar-top-links navbar-right">
+
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="/admin/profile"><i class="fa fa-user fa-fw"></i> Профиль</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/site/logout"><i class="fa fa-sign-out fa-fw"></i> Выйти</a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+                <!-- /.navbar-top-links -->
+
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu" style="padding-top: 9px;">
+
+                            <li>
+                                <a href="/admin/times"><i class="fa fa-calendar fa-fw"></i>Расписание</a>
+                            </li>
+                            
+
+                            <li>
+                                <a href="/admin/rules"><i class="fa fa-calendar fa-fw"></i>Правила</a>
+                            </li>
+
+
+                            <li>
+                                <a href="/admin/booking"><i class="fa fa fa-flag-o fa-fw"></i>Брони</a>
+                            </li>
+
+                            <li>
+                                <a href="/admin/gallery"><i class="fa fa fa-picture-o fa-fw"></i>Галерея</a>
+                            </li>
+
+                                                    </ul>
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+                <!-- /.navbar-static-side -->
+            </nav>
+
+            <div id="page-wrapper">
+                <script>
+    var panelList;
+    jQuery(function($) {
+         panelList = $('#draggablePanelList');
+        panelList.sortable({
+            // Only make the .panel-heading child elements support dragging.
+            // Omit this to make then entire <li>...</li> draggable.
+            handle: '.panel-heading',
+            update: function() {
+                return 1;// Что-то поменялось
+            }
+        });
+    });
+
+    function update()
+    {
+        var yy = {};
+        $('.panel', panelList).each(function(index, elem) {
+            var $listItem = $(elem),
+                newIndex = $listItem.index();
+            var id = $(elem).data('id');
+            yy[id] = newIndex;
+            // Persist the new indices.
+        });
+        $.post('/admin/rules/rp', {_csrf: 'NE1TbHpoWEsBHWsuPio9Hk4fHC8cCxx8VwknCRVaCjlFBGEWSjxvPw==', priority: JSON.stringify(yy)}, function (data) {
+            showAlert('Сохранено', 'alert-success', 1500);
+        });
+    }
+    function deleteRule(id)
+    {
+        showAlert('Вы действительно Удалить это правило? ' +
+            '<button class="btn metro-ui btn-default" onclick="HideAlert()" id="hide-rm">Отмена</button>' +
+            ' <button class="btn metro-ui btn-danger" onclick="confirmDeleteRule('+id+')">Удалить</button>', 'alert-success', 0);
+    }
+
+    function confirmDeleteRule(id){
+        $.post('/admin/rules/delete', {_csrf: 'NE1TbHpoWEsBHWsuPio9Hk4fHC8cCxx8VwknCRVaCjlFBGEWSjxvPw==', id: id}, function(data){
+            /*if(data)
+             {
+             showAlert("Правило успешно удалено", 'alert-success', 1);
+             $("#draggablePanelList").find("[data-id='" + id + "']").hide();
+             }
+             else
+             {
+             showAlert("У вас недостаточно прав для выполнения этой операции", 'alert-danger', 1);
+             }*/
+            window.location.reload();
+        });
+    }
+</script>
+
+
+
+<!--Rooms buttons-->
+<div class="col-md-12">
+                    <a href="/admin/rules/14" style="text-decoration: none;">
+            <button class="btn metro-ui btn-info">HOTEL HOGVARTS </button>
+        </a>
+                    <a href="/admin/rules/29" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ДРАКУЛА</button>
+        </a>
+                    <a href="/admin/rules/8" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ВТЕЧА \ ПОБЕГ</button>
+        </a>
+                    <a href="/admin/rules/11" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ВОНО</button>
+        </a>
+                    <a href="/admin/rules/44" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Гаррі Поттер Таємниця Крестражу</button>
+        </a>
+                    <a href="/admin/rules/7" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Голова Берлиоза</button>
+        </a>
+                    <a href="/admin/rules/22" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Гаррі Поттер і Таємна кімната</button>
+        </a>
+                    <a href="/admin/rules/28" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Міністерство Магії</button>
+        </a>
+                    <a href="/admin/rules/9" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">МУМІЯ</button>
+        </a>
+                    <a href="/admin/rules/46" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ХОББІТ</button>
+        </a>
+                    <a href="/admin/rules/17" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Загублені у космосі</button>
+        </a>
+                    <a href="/admin/rules/6" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Книга мертвых.</button>
+        </a>
+                    <a href="/admin/rules/43" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ДЖУМАНДЖИ</button>
+        </a>
+                    <a href="/admin/rules/21" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ЧУЖІ</button>
+        </a>
+                    <a href="/admin/rules/33" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ДЖУНГЛІ</button>
+        </a>
+                    <a href="/admin/rules/24" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Гаррі Поттер та Маховик часу</button>
+        </a>
+                    <a href="/admin/rules/38" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ЦИРК ЖАХІВ</button>
+        </a>
+                    <a href="/admin/rules/49" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">СЯЙВ0 / СИЯНИЕ</button>
+        </a>
+                    <a href="/admin/rules/12" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Полтергейст. Будинок с привідом</button>
+        </a>
+                    <a href="/admin/rules/20" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Вигнання/Изгнание </button>
+        </a>
+                    <a href="/admin/rules/40" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ТАРО: Карта смерті</button>
+        </a>
+                    <a href="/admin/rules/37" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">МОРГ: мітка на тілі</button>
+        </a>
+                    <a href="/admin/rules/36" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ДЕМОНИ ДОМУ УОРРЕН</button>
+        </a>
+                    <a href="/admin/rules/39" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Поворот не туда</button>
+        </a>
+                    <a href="/admin/rules/23" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Аннабель</button>
+        </a>
+                    <a href="/admin/rules/50" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Техаська різанина</button>
+        </a>
+                    <a href="/admin/rules/31" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ЕКЗОРЦИСТИ</button>
+        </a>
+                    <a href="/admin/rules/34" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">АСТРАЛ</button>
+        </a>
+                    <a href="/admin/rules/35" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">9 кругов АДА</button>
+        </a>
+                    <a href="/admin/rules/52" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Кровава Мері</button>
+        </a>
+                    <a href="/admin/rules/30" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Прокляття монахіні</button>
+        </a>
+                    <a href="/admin/rules/32" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Загробний світ</button>
+        </a>
+                    <a href="/admin/rules/13" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Семейка Аддамс</button>
+        </a>
+                    <a href="/admin/rules/16" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ЛАБИРИНТ</button>
+        </a>
+                    <a href="/admin/rules/3" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ПРОГРАМИ НА ДЕНЬ НАРОДЖЕННЯ</button>
+        </a>
+    </div>
+<br/>
+<br/>
+<div>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <ul id="draggablePanelList" class="list-unstyled">
+    <style>
+    .event:hover{
+        border:0;
+        cursor: default;
+    }
+</style>
+                    <li class="panel panel-info" data-id="162">
+                <div class="panel-heading">
+                    Павило <strong>НОВЫЙ ГОД</strong>
+                </div>
+                <div class="panel-body">
+                                            <div class="event">
+                            <span class="event-time">10:30</span>
+                            <span class="event-price">1300</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">12:00</span>
+                            <span class="event-price">1300</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">13:30</span>
+                            <span class="event-price">1400</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">15:00</span>
+                            <span class="event-price">1400</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">16:30</span>
+                            <span class="event-price">1600</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">18:00</span>
+                            <span class="event-price">1800</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">19:30</span>
+                            <span class="event-price">2000</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">21:00</span>
+                            <span class="event-price">2000</span>
+                        </div>
+                                        <div style="float: right;">
+                        <a href="/admin/rules/update?id=162" style="text-decoration: none;">
+                            <button class="btn btn-info">Подробнее</button>
+                        </a>
+                        <button class="btn btn-danger" onclick="deleteRule(162)">Удалить</button>
+                    </div>
+                    <div style="width: 100%; float: left; padding-top: 5px;">
+                        Действует от 31-12-2024 до <code>31-12-2024</code>
+<br/>
+                            Дни Недели: <strong>Вт   </strong>
+                    </div>
+                </div>
+            </li>
+                    <li class="panel panel-info" data-id="163">
+                <div class="panel-heading">
+                    Павило <strong>1ЯЕВАРЯ</strong>
+                </div>
+                <div class="panel-body">
+                                            <div class="event">
+                            <span class="event-time">12:00</span>
+                            <span class="event-price">2000</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">13:30</span>
+                            <span class="event-price">2000</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">15:00</span>
+                            <span class="event-price">1400</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">16:30</span>
+                            <span class="event-price">1400</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">18:00</span>
+                            <span class="event-price">1400</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">19:30</span>
+                            <span class="event-price">1400</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">21:00</span>
+                            <span class="event-price">1500</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">22:30</span>
+                            <span class="event-price">1600</span>
+                        </div>
+                                        <div style="float: right;">
+                        <a href="/admin/rules/update?id=163" style="text-decoration: none;">
+                            <button class="btn btn-info">Подробнее</button>
+                        </a>
+                        <button class="btn btn-danger" onclick="deleteRule(163)">Удалить</button>
+                    </div>
+                    <div style="width: 100%; float: left; padding-top: 5px;">
+                        Действует от 01-01-2025 до <code>01-01-2025</code>
+<br/>
+                            Дни Недели: <strong>Ср   </strong>
+                    </div>
+                </div>
+            </li>
+                    <li class="panel panel-info" data-id="153">
+                <div class="panel-heading">
+                    Павило <strong>новые цены</strong>
+                </div>
+                <div class="panel-body">
+                                            <div class="event">
+                            <span class="event-time">10:30</span>
+                            <span class="event-price">1600</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">12:00</span>
+                            <span class="event-price">1600</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">13:30</span>
+                            <span class="event-price">1600</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">15:00</span>
+                            <span class="event-price">1600</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">16:30</span>
+                            <span class="event-price">1600</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">18:00</span>
+                            <span class="event-price">1800</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">19:30</span>
+                            <span class="event-price">1800</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">21:00</span>
+                            <span class="event-price">2000</span>
+                        </div>
+                                            <div class="event">
+                            <span class="event-time">22:30</span>
+                            <span class="event-price">2200</span>
+                        </div>
+                                        <div style="float: right;">
+                        <a href="/admin/rules/update?id=153" style="text-decoration: none;">
+                            <button class="btn btn-info">Подробнее</button>
+                        </a>
+                        <button class="btn btn-danger" onclick="deleteRule(153)">Удалить</button>
+                    </div>
+                    <div style="width: 100%; float: left; padding-top: 5px;">
+                        Действует от 07-03-2026 до <code>31-12-2031</code>
+<br/>
+                            Дни Недели: <strong>Пн,   </strong><strong>Вт,   </strong><strong>Ср,   </strong><strong>Чт,   </strong><strong>Пт,   </strong><strong>Сб,   </strong><strong>Вс   </strong>
+                    </div>
+                </div>
+            </li>
+            </ul>
+        <a href="/admin/rules/create?id=14" style="text-decoration: none;">
+        <button class="btn btn-success btn-primary">Создать новое правило</button>
+    </a>
+    <button class="btn btn-primary" onclick="update()">Сохранить</button>
+    </div>            </div>
+            <!-- /#page-wrapper -->
+        </div>
+        <div id="myModalBox" class="modal fade">
+            <div class="modal-dialog mymodel">
+                <div class="modal-content mymodel">
+                    <!-- Заголовок модального окна -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">File manager</h4>
+                        <div class="uploadfile">
+                            <h5>Загрузить новый файл</h5>
+                            <form id="myId" class="dropzone">
+                                <input type="hidden" name="_csrf" value="NE1TbHpoWEsBHWsuPio9Hk4fHC8cCxx8VwknCRVaCjlFBGEWSjxvPw==" />
+                            </form>
+                        </div>
+                    </div>
+                    <h4 style="width: 100%;text-align: center;">Выбрать на сервере</h4 style>
+                    <!-- Основное содержимое модального окна -->
+                    <div class="modal-body mymodel" id='modalContent'>
+
+                    </div>
+                    <!-- Футер модального окна -->
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $('.confirms').click(function (event) {
+                    var url = event.toElement.href;
+                    showAlert('Подтвердите удаление <a class="btn btn-danger" href="' + url + '">Удалить</a> <button onclick="HideAlert()" class="btn btn-default">Отмена</button>', 'alert-warning');
+                    return false;
+                });
+            });
+            var inp = null;
+            var fill = null;
+            function loadFiles(inputid, fillImg,dir) {
+                inp = inputid;
+                fill = fillImg;
+                var url = "/admin/default/files";
+                if (dir)
+                    url = url+'?dir='+dir;
+                $.post(url, {_csrf: "NE1TbHpoWEsBHWsuPio9Hk4fHC8cCxx8VwknCRVaCjlFBGEWSjxvPw=="})
+                        .done(function (data) {
+                            // download images to modal window
+                            images = JSON.parse(data);
+                            $("#myModalBox #modalContent").children().remove();
+                            for (var i = 0; i < images.length; i++) {
+                                $("#modalContent").append("<img src='/" + images[i] + "' width='100' height='100'\n\
+             onclick='fileSelect(\"" + images[i] + "\", \"" + inputid + "\", \"" + fillImg + "\")' class='imgmanager'>");
+                            }
+                        });
+                $("#myModalBox").modal('show');
+            }
+            function fileSelect(path, inputid, fillImg) {
+                $("#" + inputid).val('/' + path);
+                $("#myModalBox").modal('hide');
+                $('#myModalBox .imgmanager').remove();
+                $("#" + fillImg).attr('src', "/" + path);
+                if ($('#photo-gallery')) {
+                    resetJcrop();
+                }
+
+            }
+        </script>
+        <script src="/assets/3e227f6f/jquery.js"></script>
+<script src="/assets/64c67b80/yii.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
+<script src="/assets/3378dcfc/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<script src="/assets/3378dcfc/js/dropzone.js"></script>
+<script src="/assets/3378dcfc/dist/js/sb-admin-2.js"></script>
+<script src="/assets/3378dcfc/ckeditor/ckeditor.js"></script>
+<script src="/assets/3378dcfc/datetime/DateTimePicker.js"></script>
+<script src="/assets/3378dcfc/datetime/DateTimePicker-ltie9.js"></script>
+<script src="/assets/3378dcfc/js/js.js"></script>        <script>
+            //$("form#myId").dropzone({ url: "/admin/default/upload", paramName:"UploadForm[imageFile]"});
+            var myDropzone = new Dropzone("form#myId", {url: "/admin/default/upload", paramName: "UploadForm[imageFile]"});
+            myDropzone.on("success", function () {
+                loadFiles(inp, fill);
+            });
+        </script>
+
+                
+    </body>
+</html>

@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="all">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-param" content="_csrf">
+    <meta name="csrf-token" content="WFlwZHJ3cU4/PSQsBgATGiI0RAsZFR0pHzohFwI7QHYVbShWOQI5AA==">
+    <title>Login</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link href="/assets/ef4993b2/css/bootstrap.css" rel="stylesheet">
+<link href="/css/site.css" rel="stylesheet">    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/ext.css">
+    <script>
+        styles =
+            [
+                {
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#ecebe8"
+                        },
+                        {
+                            "lightness": 15
+                        }
+                    ]
+                },
+                {
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                        {
+                            "color": "#273445"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative.locality",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#fbefab"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "landscape",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "color": "#242f3e"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "landscape",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                        {
+                            "color": "#5b6f7d"
+                        },
+                        {
+                            "weight": 1.5
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "color": "#373441"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#e9c8ad"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#303a32"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#6b9a76"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#38414e"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                        {
+                            "color": "#212a37"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#9ca5b3"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#746855"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                        {
+                            "color": "#1f2835"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#f3d19c"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#2f3948"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit.station",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#a798c0"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit.station.bus",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#fbefab"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit.station.rail",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#fbefab"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#4572b6"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#c1dbf4"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                }
+            ];
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-T6SXRZ3');</script>
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T6SXRZ3"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- HEADER NAVBAR -->
+<nav class="navbar navbar-inverse navbar-fixed-top" style="border-bottom: solid #595959;">
+    <div class="container-fluid">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobile-nav">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+                <a class="navbar-brand" href="/">
+                    PAUTINA                </a>
+                
+                <ul id="menu_phones"><li><a href="tel:+380732152623" class="navbar-link">+380732152623</a></li><li><a href="tel: +380989351270" class="navbar-link"> +380989351270</a></li><li><a href="tel: +380997350009" class="navbar-link"> +380997350009</a></li></ul>            </div>
+            
+            <div class="collapse navbar-collapse" id="mobile-nav">
+                <ul id="menu_socials" class="nav navbar-nav navbar-right">                                <li><a href="https://www.facebook.com/pautinarooms/"
+                                       style="text-decoration: none;" target="_blank">
+                                    <i class="fa fa-facebook"></i>
+                                    </a></li>
+                                                                <li><a href="https://www.instagram.com/pautinarooms"
+                                       style="text-decoration: none;" target="_blank">
+                                    <i class="fa fa-instagram"></i>
+                                    </a></li>
+                                </ul>                
+                <ul id="menu" class="nav navbar-nav navbar-right">
+                                                            <li>
+                        <a href="https://www.pautina-rooms.com/#rooms">КІмнати</a>                    </li>
+                                        <li>
+                        <a href="https://www.pautina-rooms.com/photos">Галерея</a>                    </li>
+                                        <li>
+                        <a href="https://www.pautina-rooms.com/pages/dr">Програми на ДЕНЬ НАРОДЖЕННЯ</a>                    </li>
+                                        <li>
+                        <a href="https://www.pautina-rooms.com/pages/certificates">Сертифікат</a>                    </li>
+                                        <li>
+                        <a href="https://www.pautina-rooms.com/pages/faq">FAQ</a>                    </li>
+                                        <li>
+                        <a href="https://www.pautina-rooms.com/pages/streetquest">Піши КВЕСТИ</a>                    </li>
+                                        <li>
+                        <a href="https://www.pautina-rooms.com/pages/contacts">Контакти</a>                    </li>
+                                                        </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- /HEADER NAVBAR -->
+<div id="menu_space" style="height: 73px;"> </div>
+<div class="content-container">
+    <div class="centr-block">
+	<div class="site-login">
+		<h1>Login</h1>
+				<form id="login-form" action="/site/login" method="post" role="form">
+<input type="hidden" name="_csrf" value="WFlwZHJ3cU4/PSQsBgATGiI0RAsZFR0pHzohFwI7QHYVbShWOQI5AA==">
+					<div class="form-group field-loginform-username required">
+<label class="control-label" for="loginform-username">Username</label>
+<input type="text" id="loginform-username" class="form-control" name="LoginForm[username]" autofocus>
+
+<p class="help-block help-block-error"></p>
+</div>
+					<div class="form-group field-loginform-password required">
+<label class="control-label" for="loginform-password">Password</label>
+<input type="password" id="loginform-password" class="form-control" name="LoginForm[password]">
+
+<p class="help-block help-block-error"></p>
+</div>
+					<div class="form-group field-loginform-rememberme">
+<div class="checkbox">
+<label for="loginform-rememberme">
+<input type="hidden" name="LoginForm[rememberMe]" value="0"><input type="checkbox" id="loginform-rememberme" name="LoginForm[rememberMe]" value="1" checked>
+Remember Me
+</label>
+<p class="help-block help-block-error"></p>
+
+</div>
+</div>
+					<div style="color:#999;margin:1em 0">
+<!--						If you forgot your password you can --><!--.-->
+					</div>
+
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary" name="login-button">Login</button>					</div>
+
+				</form>	</div>
+</div>
+</div>
+
+<script src="/assets/3e227f6f/jquery.js"></script>
+<script src="/assets/64c67b80/yii.js"></script>
+<script src="/assets/64c67b80/yii.validation.js"></script>
+<script src="/assets/64c67b80/yii.activeForm.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript">jQuery(document).ready(function () {
+jQuery('#login-form').yiiActiveForm([{"id":"loginform-username","name":"username","container":".field-loginform-username","input":"#loginform-username","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"Username cannot be blank."});}},{"id":"loginform-password","name":"password","container":".field-loginform-password","input":"#loginform-password","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"Password cannot be blank."});}},{"id":"loginform-rememberme","name":"rememberMe","container":".field-loginform-rememberme","input":"#loginform-rememberme","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.boolean(value, messages, {"trueValue":"1","falseValue":"0","message":"Remember Me must be either \"1\" or \"0\".","skipOnEmpty":1});}}], []);
+});</script>
+<!--FOOTER-->
+<div class="mfooter" style="color: #000000">
+    <div class="mcontainer">
+                                    <span>
+                <a href="/pages/contacts" style="color: #bcbcbc; font-size: 12px;">Зв'язок</a>
+            </span>
+                        </div>
+</div>
+<!-- /FOOTER -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90053712-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+<script src='/fansybox/jquery.fancybox.min.js'></script>
+
+<script type="text/javascript">
+    if ($(".fansybox-gallery")){
+        jQuery(document).ready(function() {
+                jQuery("a[rel=group]").fancybox({
+                            prevEffect      : 'fade',
+        nextEffect      : 'fade',
+       
+                    
+                });
+        });
+    }
+	
+</script>
+
+
+</body>
+</html>

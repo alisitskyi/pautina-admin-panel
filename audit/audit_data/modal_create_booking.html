@@ -1,0 +1,102 @@
+<form id="booking_form_submit" action="/admin/booking/create" method="post">
+<input type="hidden" name="_csrf" value="WFVjMXNkYks5EjB1CSxRCGwWN2Q5LCUjbx5OZUMnUT4bNBRXOgIMfw==">
+    <div class="data-row">
+        <div class="col col-1-new">
+                            <div class="form-group field-booking-name required">
+<label class="control-label" for="booking-name">Имя</label>
+<input type="text" id="booking-name" class="form-control" name="Booking[name]" maxlength="100">
+
+<div class="help-block"></div>
+</div>                <div class="form-group field-booking-phone required">
+<label class="control-label" for="booking-phone">Телефон</label>
+<input type="text" id="booking-phone" class="form-control" name="Booking[phone]" maxlength="30">
+
+<div class="help-block"></div>
+</div>                <div class="form-group field-booking-email">
+<label class="control-label" for="booking-email">Email</label>
+<input type="email" id="booking-email" class="form-control" name="Booking[email]">
+
+<div class="help-block"></div>
+</div>            
+            <div class="form-group field-booking-user_comment">
+<label class="control-label" for="booking-user_comment">Комментарий</label>
+<input type="text" id="booking-user_comment" class="form-control" name="Booking[user_comment]" readonly="readonly">
+
+<div class="help-block"></div>
+</div><div class="form-group field-booking-admin_comment">
+<label class="control-label" for="booking-admin_comment">Комментарий оператора</label>
+<textarea id="booking-admin_comment" class="form-control" name="Booking[admin_comment]" rows="4"></textarea>
+
+<div class="help-block"></div>
+</div><div class="form-group field-booking-client_confirm">
+
+<input type="hidden" name="Booking[client_confirm]" value="0"><label><input type="checkbox" id="booking-client_confirm" name="Booking[client_confirm]" value="1" checked> Подтверждена клиентом</label>
+
+<div class="help-block"></div>
+</div><div class="form-group field-booking-game_status">
+<label class="control-label" for="booking-game_status">Статус игры</label>
+<input type="hidden" name="Booking[game_status]" value=""><div id="booking-game_status"><label><input type="radio" name="Booking[game_status]" value="2" checked> Будет играть</label>
+<label><input type="radio" name="Booking[game_status]" value="1"> Игра состояласть</label>
+<label><input type="radio" name="Booking[game_status]" value="0"> Игра не состоялась</label>
+<label><input type="radio" name="Booking[game_status]" value="3"> Сервисная бронь</label></div>
+
+<div class="help-block"></div>
+</div><div class="form-group field-booking-service">
+
+<input type="hidden" id="booking-service" class="form-control" name="Booking[service]" value="0">
+
+<div class="help-block"></div>
+</div>            <input type="hidden" name="Booking[timeline_id]"
+                   value="732442">
+        </div>
+                        <div class="col col-3">
+            <p>
+                <strong>10:30</strong>
+                19.10.26            </p>
+            <p><strong>1600</strong> грн</p>
+
+                                </div>
+    </div>
+    <!--	-->
+    <div class="buttons-row">
+
+        <div class="coli col-btns-offset"></div><div class="coli col-buttons"><button type="submit" class="btn btn-primary">Сохранить</button></div>
+    </div>
+
+    </form>
+
+<script>
+    $(document).ready(function () {
+        //var DefaultHeight;
+        $('.confirms').click(function (event) {
+            var url = event.target.href;
+            showAlert('Подтвердите удаление <a class="btn btn-danger" href="' + url + '">Удалить</a> <button onclick="HideAlert()" class="btn btn-default">Отмена</button>', 'alert-warning');
+            return false;
+        });
+
+        $("#transfer-checkbox").change(function () {
+            if ($("#transfer-checkbox").is(':checked')) {
+                //defaultHeight = $("#admin_log").css('height');
+                //$("#admin_log").css('height', '171px');
+                $("#selectors-block").show();
+            }
+            else {
+                $("#selectors-block").hide();
+                //$("#admin_log").css('height', defaultHeight);
+            }
+        });
+
+        $("#main-selector").change(function () {
+            var time = this.value;
+            $.post('/admin/times/gettimes?time=' + time + '&room=14', {_csrf: 'WFVjMXNkYks5EjB1CSxRCGwWN2Q5LCUjbx5OZUMnUT4bNBRXOgIMfw=='}, function (data) {
+                $("#option-selector").children().remove();
+                $.each(data, function (k, it) {
+                    $("#option-selector").append('<option value="' + it["id"] + '">' + it["start_time"] + ' (' + it["price"] + ')</option>');
+                });
+                $("#option-selector").show();
+            });
+        });
+    });
+
+    
+</script>

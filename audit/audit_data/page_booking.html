@@ -1,0 +1,512 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <!--        <meta name="viewport" content="width=device-width, initial-scale=1">-->
+        <meta name="csrf-param" content="_csrf">
+    <meta name="csrf-token" content="a1RGdHdwZE1eBH42MzIBGBEGCTcREyB6CBAyERhCNj8aHXQORyRTOQ==">
+        <title>Брони</title>
+        <link href="/assets/91166d5e/themes/smoothness/jquery-ui.css" rel="stylesheet">
+<link href="/assets/ef4993b2/css/bootstrap.css" rel="stylesheet">
+<link href="/css/site.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+<link href="/assets/3378dcfc/dist/css/timeline.css" rel="stylesheet">
+<link href="/assets/3378dcfc/dist/css/sb-admin-2.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/morrisjs/morris.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/3378dcfc/dropzone.css" rel="stylesheet">
+<link href="/assets/3378dcfc/datetime/DateTimePicker.css" rel="stylesheet">
+<link href="/assets/3378dcfc/datetime/DateTimePicker-ltie9.css" rel="stylesheet">        <script src="/ckeditor/ckeditor.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="/css/ext_admin.css">
+    </head>
+    <body style="overflow-y: scroll; min-width: 1280px;">
+                <div class="alert" id="info-alert"></div>
+        <script>
+            function showAlert(message, className, autoHide)
+            {
+                $("#info-alert").html(message);
+                $("#info-alert").removeClass('alert-danger alert-success alert-info alert-warning');
+                $("#info-alert").addClass(className);
+                $("#info-alert").fadeIn();
+                if (autoHide)
+                {
+                    window.setTimeout(function () {
+                        $("#info-alert").fadeToggle(1500);
+                    }, 3000);
+                }
+            }
+            function HideAlert()
+            {
+                $("#info-alert").fadeToggle(500);
+            }
+        </script>
+        <div id="wrapper">
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="/admin">[Anton - Anton]</a>
+                </div>
+                <!-- /.navbar-header -->
+
+                <ul class="nav navbar-top-links navbar-right">
+
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="/admin/profile"><i class="fa fa-user fa-fw"></i> Профиль</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/site/logout"><i class="fa fa-sign-out fa-fw"></i> Выйти</a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+                <!-- /.navbar-top-links -->
+
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu" style="padding-top: 9px;">
+
+                            <li>
+                                <a href="/admin/times"><i class="fa fa-calendar fa-fw"></i>Расписание</a>
+                            </li>
+                            
+
+                            <li>
+                                <a href="/admin/rules"><i class="fa fa-calendar fa-fw"></i>Правила</a>
+                            </li>
+
+
+                            <li>
+                                <a href="/admin/booking"><i class="fa fa fa-flag-o fa-fw"></i>Брони</a>
+                            </li>
+
+                            <li>
+                                <a href="/admin/gallery"><i class="fa fa fa-picture-o fa-fw"></i>Галерея</a>
+                            </li>
+
+                                                    </ul>
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+                <!-- /.navbar-static-side -->
+            </nav>
+
+            <div id="page-wrapper">
+                <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.css"/>
+<!--Rooms buttons-->
+<div class="col-md-12 row">
+                    <a href="/admin/booking?id=14" style="text-decoration: none;">
+            <button class="btn metro-ui btn-info">HOTEL HOGVARTS </button>
+        </a>
+                    <a href="/admin/booking?id=29" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ДРАКУЛА</button>
+        </a>
+                    <a href="/admin/booking?id=8" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ВТЕЧА \ ПОБЕГ</button>
+        </a>
+                    <a href="/admin/booking?id=11" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ВОНО</button>
+        </a>
+                    <a href="/admin/booking?id=44" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Гаррі Поттер Таємниця Крестражу</button>
+        </a>
+                    <a href="/admin/booking?id=7" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Голова Берлиоза</button>
+        </a>
+                    <a href="/admin/booking?id=22" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Гаррі Поттер і Таємна кімната</button>
+        </a>
+                    <a href="/admin/booking?id=28" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Міністерство Магії</button>
+        </a>
+                    <a href="/admin/booking?id=9" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">МУМІЯ</button>
+        </a>
+                    <a href="/admin/booking?id=46" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ХОББІТ</button>
+        </a>
+                    <a href="/admin/booking?id=17" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Загублені у космосі</button>
+        </a>
+                    <a href="/admin/booking?id=6" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Книга мертвых.</button>
+        </a>
+                    <a href="/admin/booking?id=43" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ДЖУМАНДЖИ</button>
+        </a>
+                    <a href="/admin/booking?id=21" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ЧУЖІ</button>
+        </a>
+                    <a href="/admin/booking?id=33" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ДЖУНГЛІ</button>
+        </a>
+                    <a href="/admin/booking?id=24" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Гаррі Поттер та Маховик часу</button>
+        </a>
+                    <a href="/admin/booking?id=38" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ЦИРК ЖАХІВ</button>
+        </a>
+                    <a href="/admin/booking?id=49" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">СЯЙВ0 / СИЯНИЕ</button>
+        </a>
+                    <a href="/admin/booking?id=12" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Полтергейст. Будинок с привідом</button>
+        </a>
+                    <a href="/admin/booking?id=20" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Вигнання/Изгнание </button>
+        </a>
+                    <a href="/admin/booking?id=40" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ТАРО: Карта смерті</button>
+        </a>
+                    <a href="/admin/booking?id=37" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">МОРГ: мітка на тілі</button>
+        </a>
+                    <a href="/admin/booking?id=36" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ДЕМОНИ ДОМУ УОРРЕН</button>
+        </a>
+                    <a href="/admin/booking?id=39" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Поворот не туда</button>
+        </a>
+                    <a href="/admin/booking?id=23" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Аннабель</button>
+        </a>
+                    <a href="/admin/booking?id=50" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Техаська різанина</button>
+        </a>
+                    <a href="/admin/booking?id=31" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ЕКЗОРЦИСТИ</button>
+        </a>
+                    <a href="/admin/booking?id=34" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">АСТРАЛ</button>
+        </a>
+                    <a href="/admin/booking?id=35" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">9 кругов АДА</button>
+        </a>
+                    <a href="/admin/booking?id=52" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Кровава Мері</button>
+        </a>
+                    <a href="/admin/booking?id=30" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Прокляття монахіні</button>
+        </a>
+                    <a href="/admin/booking?id=32" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Загробний світ</button>
+        </a>
+                    <a href="/admin/booking?id=13" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">Семейка Аддамс</button>
+        </a>
+                    <a href="/admin/booking?id=16" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ЛАБИРИНТ</button>
+        </a>
+                    <a href="/admin/booking?id=3" style="text-decoration: none;">
+            <button class="btn metro-ui btn-default">ПРОГРАМИ НА ДЕНЬ НАРОДЖЕННЯ</button>
+        </a>
+    </div>
+<div class="row">
+    <div class="col-md-12">
+    </div>
+</div>
+<form id="filter">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <br/>
+            <label for="date_from">От</label>
+            <input type="text" id="date_from" name="date_from" value="19-10-2026">
+            <label for="date_to">До</label>
+            <input type="text" id="date_to" name="date_to" value="09-11-2026">
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Бронь подтверждена </label>
+                <select class="form-control" name="confirm" id="conform-select">
+                    <option value="99">Все</option>
+                    <option value="1">Да</option>
+                    <option value="0">Нет</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Статус </label>
+                <select name="status" class="form-control" id="select-status">
+                    <option value="99">Все</option>
+                    <option value="2">Будет играть</option>
+                    <option value="1">Игра состоялась</option>
+                    <option value="0">Игра не состоялась</option>
+                    <option value="3">Сервисная бронь</option>
+                    <option value="4">Только игры</option>
+                    <option value="5">Конфликтные брони</option>
+                </select>
+            </div>
+        </div>
+        <input type="hidden" name="_csrf" value="a1RGdHdwZE1eBH42MzIBGBEGCTcREyB6CBAyERhCNj8aHXQORyRTOQ=="/>
+</form>
+<div class="form-group">
+    <button type="button" class="btn btn-primary" onclick="Filter()">Фильтровать</button>
+</div>
+<button type="button" class="btn btn-warning btn-block" id="conf-btn" style="display: none;"></button>
+</div>
+<div class="col-md-12">
+    <table id="bookingListTable" class="display" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>Дата</th>
+            <th>Время</th>
+            <th>Цена</th>
+            <th>Имя</th>
+            <th>Телефон</th>
+            <th>Статус</th>
+            <th>Подтверждено</th>
+            <th>Дата брони.</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>Дата</th>
+            <th>Время</th>
+            <th>Цена</th>
+            <th>Имя</th>
+            <th>Телефон</th>
+            <th>Статус</th>
+            <th>Подтверждено</th>
+            <th>Дата брони.</th>
+        </tr>
+        </tfoot>
+        <tbody></tbody>
+    </table>
+    <p id="total_real"></p>
+</div>
+
+<div id="BMD" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content metro-ui">
+            <div class="modal-header">
+                <button type="button" class="btn btn-danger btn-sm metro-ui-btn" data-dismiss="modal"
+                        aria-hidden="true">×
+                </button>
+                <h4 class="modal-title">Бронь: HOTEL HOGVARTS </h4>
+            </div>
+            <div class="modal-body content-container"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var table;
+    $(document).ready(function () {
+        table = $('#bookingListTable').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "pageLength": 10,
+            "bSort": false,
+            "searching": false,
+            "ajax": {
+                "url": "/admin/booking/table?room_id=14",
+                "type": "POST",
+                "data": function (d) {
+                    d._csrf = "a1RGdHdwZE1eBH42MzIBGBEGCTcREyB6CBAyERhCNj8aHXQORyRTOQ==";
+                    d.dateFrom = $('input[name="date_from"]').val();
+                    d.dateTo = $('input[name="date_to"]').val();
+                    d.status = $('#select-status').val();
+                    d.confirm = $("#conform-select").val();
+                }
+            },
+            "columns": [
+                {
+                    "data": function (d) {
+                        return '<a style="cursor: pointer" onclick="editBooking(' + d.id + ')">' + d.date + '</a>'
+                    }
+                },
+                {
+                    "data": function (d) {
+                        return '<a style="cursor: pointer" onclick="editBooking(' + d.id + ')">' + d.time + '</a>'
+                    }
+                },
+                {"data": "price"},
+                {"data": "name"},
+                {"data": "phone"},
+                {
+                    "data": function (d) {
+                        if (d.game_status == 1)
+                            return '<i class="fa fa-exclamation-triangle" style="color: green" aria-hidden="true"></i> Состоялась';
+                        else if (d.game_status == 2)
+                            return '<i class="fa fa-exclamation-triangle" style="color: rgb(255, 188, 0)" aria-hidden="true"></i> Будет играть';
+                        else if (d.game_status == 0)
+                            return '<i class="fa fa-exclamation-triangle" style="color: red" aria-hidden="true"></i> Не состоялась';
+                        else
+                            return '<i class="fa fa-exclamation-triangle" style="color: grey" aria-hidden="true"></i> Сервисная бронь'
+                    }
+                },
+                {
+                    "data": function (d) {
+                        if (d.client_confirm == 1)
+                            return '<i class="fa fa-check fa-2x" style="color: green" aria-hidden="true"></i>';
+                        else
+                            return '<i class="fa fa-exclamation-triangle fa-2x" style="color: rgb(255, 188, 0)" aria-hidden="true"></i>';
+                    }
+                },
+                {"data": "booking_time"}
+            ],
+            "fnRowCallback": function (nRow, aData) {
+                if (aData.deleted == 1) {
+                    $(nRow).css('color', 'red');
+                }
+            },
+            "fnInitComplete": function (data) {
+                var conflicts = data.jqXHR.responseJSON.conflicts;
+                if (data.jqXHR.responseJSON.real !== 'access_denied')
+                    $('#total_real').html('Сумма фактической стоимости: ' + data.jqXHR.responseJSON.real);
+                if (conflicts != 0) {
+                    var btn = $("#conf-btn");
+                    btn.text('Конфликтные брони (' + conflicts + ')');
+                    btn.show();
+                }
+            }
+
+        });
+        $("#conf-btn").click(function () {
+            $("#select-status option[value=5]").attr('selected', 'selected');
+            Filter();
+        });
+    });
+    function Filter() {
+        $("#conf-btn").hide();
+        table.ajax.reload(function (json) {
+            var conflicts = json.conflicts;
+            if (conflicts != 0) {
+                var btn = $("#conf-btn");
+                btn.text('Конфликтные брони (' + conflicts + ')');
+                btn.show();
+            }
+        });
+    }
+
+    function getFromData() {
+        var _dateFrom = $('input[name="date_from"]').val();
+        var _dateTo = $('input[name="date_to"]').val();
+        var _status = $('#select-status').val();
+        var _confirm = $("#conform-select").val();
+        console.log(status);
+        return {date_from: _dateFrom, date_to: _dateTo, status: _status, confirm: _confirm};
+    }
+    function editBooking(bookingID) {
+        $.post('/admin/booking/editinfo', {
+            _csrf: 'a1RGdHdwZE1eBH42MzIBGBEGCTcREyB6CBAyERhCNj8aHXQORyRTOQ==',
+            id: bookingID
+        }, function (htm) {
+            $("#BMD .modal-body").html(htm);
+            $("#BMD").modal('show');
+        })
+    }
+</script>
+            </div>
+            <!-- /#page-wrapper -->
+        </div>
+        <div id="myModalBox" class="modal fade">
+            <div class="modal-dialog mymodel">
+                <div class="modal-content mymodel">
+                    <!-- Заголовок модального окна -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">File manager</h4>
+                        <div class="uploadfile">
+                            <h5>Загрузить новый файл</h5>
+                            <form id="myId" class="dropzone">
+                                <input type="hidden" name="_csrf" value="a1RGdHdwZE1eBH42MzIBGBEGCTcREyB6CBAyERhCNj8aHXQORyRTOQ==" />
+                            </form>
+                        </div>
+                    </div>
+                    <h4 style="width: 100%;text-align: center;">Выбрать на сервере</h4 style>
+                    <!-- Основное содержимое модального окна -->
+                    <div class="modal-body mymodel" id='modalContent'>
+
+                    </div>
+                    <!-- Футер модального окна -->
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $('.confirms').click(function (event) {
+                    var url = event.toElement.href;
+                    showAlert('Подтвердите удаление <a class="btn btn-danger" href="' + url + '">Удалить</a> <button onclick="HideAlert()" class="btn btn-default">Отмена</button>', 'alert-warning');
+                    return false;
+                });
+            });
+            var inp = null;
+            var fill = null;
+            function loadFiles(inputid, fillImg,dir) {
+                inp = inputid;
+                fill = fillImg;
+                var url = "/admin/default/files";
+                if (dir)
+                    url = url+'?dir='+dir;
+                $.post(url, {_csrf: "a1RGdHdwZE1eBH42MzIBGBEGCTcREyB6CBAyERhCNj8aHXQORyRTOQ=="})
+                        .done(function (data) {
+                            // download images to modal window
+                            images = JSON.parse(data);
+                            $("#myModalBox #modalContent").children().remove();
+                            for (var i = 0; i < images.length; i++) {
+                                $("#modalContent").append("<img src='/" + images[i] + "' width='100' height='100'\n\
+             onclick='fileSelect(\"" + images[i] + "\", \"" + inputid + "\", \"" + fillImg + "\")' class='imgmanager'>");
+                            }
+                        });
+                $("#myModalBox").modal('show');
+            }
+            function fileSelect(path, inputid, fillImg) {
+                $("#" + inputid).val('/' + path);
+                $("#myModalBox").modal('hide');
+                $('#myModalBox .imgmanager').remove();
+                $("#" + fillImg).attr('src', "/" + path);
+                if ($('#photo-gallery')) {
+                    resetJcrop();
+                }
+
+            }
+        </script>
+        <script src="/assets/3e227f6f/jquery.js"></script>
+<script src="/assets/91166d5e/jquery-ui.js"></script>
+<script src="/assets/91166d5e/ui/i18n/datepicker-ru.js"></script>
+<script src="/assets/64c67b80/yii.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
+<script src="/assets/3378dcfc/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<script src="/assets/3378dcfc/js/dropzone.js"></script>
+<script src="/assets/3378dcfc/dist/js/sb-admin-2.js"></script>
+<script src="/assets/3378dcfc/ckeditor/ckeditor.js"></script>
+<script src="/assets/3378dcfc/datetime/DateTimePicker.js"></script>
+<script src="/assets/3378dcfc/datetime/DateTimePicker-ltie9.js"></script>
+<script src="/assets/3378dcfc/js/js.js"></script>
+<script type="text/javascript">jQuery(document).ready(function () {
+$('#date_from').datepicker($.extend({}, $.datepicker.regional['ru'], {"dateFormat":"dd-mm-yy"}));
+$('#date_to').datepicker($.extend({}, $.datepicker.regional['ru'], {"dateFormat":"dd-mm-yy"}));
+});</script>        <script>
+            //$("form#myId").dropzone({ url: "/admin/default/upload", paramName:"UploadForm[imageFile]"});
+            var myDropzone = new Dropzone("form#myId", {url: "/admin/default/upload", paramName: "UploadForm[imageFile]"});
+            myDropzone.on("success", function () {
+                loadFiles(inp, fill);
+            });
+        </script>
+
+                
+    </body>
+</html>

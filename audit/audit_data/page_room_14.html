@@ -1,0 +1,1895 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <!--        <meta name="viewport" content="width=device-width, initial-scale=1">-->
+        <meta name="csrf-param" content="_csrf">
+    <meta name="csrf-token" content="U1pNMC02TGZmCnVyaXQpMykIAnNLVQhRMB45VUIEHhQiE39KHWJ7Eg==">
+        <title>Расписание</title>
+        <link href="/assets/ef4993b2/css/bootstrap.css" rel="stylesheet">
+<link href="/css/site.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+<link href="/assets/3378dcfc/dist/css/timeline.css" rel="stylesheet">
+<link href="/assets/3378dcfc/dist/css/sb-admin-2.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/morrisjs/morris.css" rel="stylesheet">
+<link href="/assets/3378dcfc/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/3378dcfc/dropzone.css" rel="stylesheet">
+<link href="/assets/3378dcfc/datetime/DateTimePicker.css" rel="stylesheet">
+<link href="/assets/3378dcfc/datetime/DateTimePicker-ltie9.css" rel="stylesheet">        <script src="/ckeditor/ckeditor.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="/css/ext_admin.css">
+    </head>
+    <body style="overflow-y: scroll; min-width: 1280px;">
+                <div class="alert" id="info-alert"></div>
+        <script>
+            function showAlert(message, className, autoHide)
+            {
+                $("#info-alert").html(message);
+                $("#info-alert").removeClass('alert-danger alert-success alert-info alert-warning');
+                $("#info-alert").addClass(className);
+                $("#info-alert").fadeIn();
+                if (autoHide)
+                {
+                    window.setTimeout(function () {
+                        $("#info-alert").fadeToggle(1500);
+                    }, 3000);
+                }
+            }
+            function HideAlert()
+            {
+                $("#info-alert").fadeToggle(500);
+            }
+        </script>
+        <div id="wrapper">
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="/admin">[Anton - Anton]</a>
+                </div>
+                <!-- /.navbar-header -->
+
+                <ul class="nav navbar-top-links navbar-right">
+
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="/admin/profile"><i class="fa fa-user fa-fw"></i> Профиль</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/site/logout"><i class="fa fa-sign-out fa-fw"></i> Выйти</a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+                <!-- /.navbar-top-links -->
+
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu" style="padding-top: 9px;">
+
+                            <li>
+                                <a href="/admin/times"><i class="fa fa-calendar fa-fw"></i>Расписание</a>
+                            </li>
+                            
+
+                            <li>
+                                <a href="/admin/rules"><i class="fa fa-calendar fa-fw"></i>Правила</a>
+                            </li>
+
+
+                            <li>
+                                <a href="/admin/booking"><i class="fa fa fa-flag-o fa-fw"></i>Брони</a>
+                            </li>
+
+                            <li>
+                                <a href="/admin/gallery"><i class="fa fa fa-picture-o fa-fw"></i>Галерея</a>
+                            </li>
+
+                                                    </ul>
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+                <!-- /.navbar-static-side -->
+            </nav>
+
+            <div id="page-wrapper">
+                    <link rel="stylesheet" type="text/css" href="/css/reservation.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/admin_calendar.css"/>
+
+<div id="w0" data-pjax-container="" data-pjax-push-state data-pjax-timeout="1000">    <!--Rooms buttons-->
+    <div class="col-md-12 row">
+                                <a href="/admin/times/14" style="text-decoration: none;">
+                <button class="btn metro-ui btn-info">HOTEL HOGVARTS </button>
+            </a>
+                                <a href="/admin/times/29" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">ДРАКУЛА</button>
+            </a>
+                                <a href="/admin/times/8" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">ВТЕЧА \ ПОБЕГ</button>
+            </a>
+                                <a href="/admin/times/11" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">ВОНО</button>
+            </a>
+                                <a href="/admin/times/44" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">Гаррі Поттер Таємниця Крестражу</button>
+            </a>
+                                <a href="/admin/times/7" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">Голова Берлиоза</button>
+            </a>
+                                <a href="/admin/times/22" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">Гаррі Поттер і Таємна кімната</button>
+            </a>
+                                <a href="/admin/times/28" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">Міністерство Магії</button>
+            </a>
+                                <a href="/admin/times/9" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">МУМІЯ</button>
+            </a>
+                                <a href="/admin/times/46" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">ХОББІТ</button>
+            </a>
+                                <a href="/admin/times/17" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">Загублені у космосі</button>
+            </a>
+                                <a href="/admin/times/6" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">Книга мертвых.</button>
+            </a>
+                                <a href="/admin/times/43" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">ДЖУМАНДЖИ</button>
+            </a>
+                                <a href="/admin/times/21" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">ЧУЖІ</button>
+            </a>
+                                <a href="/admin/times/33" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">ДЖУНГЛІ</button>
+            </a>
+                                <a href="/admin/times/24" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">Гаррі Поттер та Маховик часу</button>
+            </a>
+                                <a href="/admin/times/38" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">ЦИРК ЖАХІВ</button>
+            </a>
+                                <a href="/admin/times/49" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">СЯЙВ0 / СИЯНИЕ</button>
+            </a>
+                                <a href="/admin/times/12" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">Полтергейст. Будинок с привідом</button>
+            </a>
+                                <a href="/admin/times/20" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">Вигнання/Изгнание </button>
+            </a>
+                                <a href="/admin/times/40" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">ТАРО: Карта смерті</button>
+            </a>
+                                <a href="/admin/times/37" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">МОРГ: мітка на тілі</button>
+            </a>
+                                <a href="/admin/times/36" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">ДЕМОНИ ДОМУ УОРРЕН</button>
+            </a>
+                                <a href="/admin/times/39" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">Поворот не туда</button>
+            </a>
+                                <a href="/admin/times/23" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">Аннабель</button>
+            </a>
+                                <a href="/admin/times/50" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">Техаська різанина</button>
+            </a>
+                                <a href="/admin/times/31" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">ЕКЗОРЦИСТИ</button>
+            </a>
+                                <a href="/admin/times/34" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">АСТРАЛ</button>
+            </a>
+                                <a href="/admin/times/35" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">9 кругов АДА</button>
+            </a>
+                                <a href="/admin/times/52" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">Кровава Мері</button>
+            </a>
+                                <a href="/admin/times/30" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">Прокляття монахіні</button>
+            </a>
+                                <a href="/admin/times/32" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">Загробний світ</button>
+            </a>
+                                <a href="/admin/times/13" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">Семейка Аддамс</button>
+            </a>
+                                <a href="/admin/times/16" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">ЛАБИРИНТ</button>
+            </a>
+                                <a href="/admin/times/3" style="text-decoration: none;">
+                <button class="btn metro-ui btn-default">ПРОГРАМИ НА ДЕНЬ НАРОДЖЕННЯ</button>
+            </a>
+            </div>
+    <div class="col-md-12 row" style="margin-top: 4px;margin-bottom: 4px;">
+                        <a href="/admin/times/14?history=1">Показать историю</a>
+                </div>
+
+    <!--Show time period-->
+    <div id="room_content" class="calendar main-area two-pane rooms col-md-12">
+                                <div class="reserv-row  ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Понедельник</div>
+                        <div name="date" class="date">19.10.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732442)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732443)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732444)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732445)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732446)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732447)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732448)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732449)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732450)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row  ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Вторник</div>
+                        <div name="date" class="date">20.10.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732758)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732759)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732760)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732761)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732762)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732763)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732764)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732765)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(732766)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row  ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Среда</div>
+                        <div name="date" class="date">21.10.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733074)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733075)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733076)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733077)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733078)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733079)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733080)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733081)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733082)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row  ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Четверг</div>
+                        <div name="date" class="date">22.10.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733390)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733391)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733392)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733393)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733394)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733395)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733396)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733397)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733398)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row  ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Пятница</div>
+                        <div name="date" class="date">23.10.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733706)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733707)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733708)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733709)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733710)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733711)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733712)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733713)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(733714)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row holiday ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Суббота</div>
+                        <div name="date" class="date">24.10.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734022)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734023)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734024)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734025)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734026)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734027)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734028)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734029)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734030)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row holiday ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Воскресенье</div>
+                        <div name="date" class="date">25.10.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734338)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item confirmed  reserved" onclick="editBooking(49995)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item confirmed  reserved" onclick="editBooking(49943)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734341)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734342)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734343)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734344)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734345)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734346)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row  ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Понедельник</div>
+                        <div name="date" class="date">26.10.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734819)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734820)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734821)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item notconfirmed  reserved" onclick="editBooking(49517)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734823)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734824)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734825)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734826)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(734827)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row  ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Вторник</div>
+                        <div name="date" class="date">27.10.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735135)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735136)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735137)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735138)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735139)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735140)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735141)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735142)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735143)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row  ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Среда</div>
+                        <div name="date" class="date">28.10.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735451)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735452)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735453)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735454)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735455)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735456)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735457)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735458)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735459)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row  ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Четверг</div>
+                        <div name="date" class="date">29.10.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735767)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735768)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735769)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735770)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735771)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735772)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735773)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735774)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(735775)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row  ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Пятница</div>
+                        <div name="date" class="date">30.10.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736083)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736084)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736085)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736086)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736087)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736088)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736089)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736090)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736091)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row holiday ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Суббота</div>
+                        <div name="date" class="date">31.10.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736399)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736400)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736401)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736402)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736403)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736404)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736405)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736406)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736407)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row holiday ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Воскресенье</div>
+                        <div name="date" class="date">01.11.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736715)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736716)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item confirmed  reserved" onclick="editBooking(49891)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736718)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item confirmed  reserved" onclick="editBooking(49890)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item confirmed  reserved" onclick="editBooking(49838)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736721)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736722)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736723)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row  ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Понедельник</div>
+                        <div name="date" class="date">02.11.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736882)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736883)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736884)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736885)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736886)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736887)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736888)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736889)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(736890)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row  ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Вторник</div>
+                        <div name="date" class="date">03.11.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737198)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737199)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737200)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737201)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737202)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737203)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737204)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737205)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737206)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row  ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Среда</div>
+                        <div name="date" class="date">04.11.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737514)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737515)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737516)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737517)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737518)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737519)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737520)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737521)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737522)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row  ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Четверг</div>
+                        <div name="date" class="date">05.11.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737830)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737831)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737832)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737833)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737834)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737835)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737836)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737837)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(737838)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row  ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Пятница</div>
+                        <div name="date" class="date">06.11.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738146)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738147)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738148)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738149)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738150)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738151)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738152)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738153)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738154)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+                                <div class="reserv-row holiday ">
+                <div class="cell title cell-header">
+                    <div class="cell-content">
+                        <div name="day" class="day">Суббота</div>
+                        <div name="date" class="date">07.11.2026</div>
+                    </div>
+                </div>
+
+                <div class="rows-wrapper-content">
+                    <div class="rows-wrapper-content2">
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738462)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">10:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738463)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">12:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738464)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">13:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738465)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">15:00</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738466)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">16:30</div>
+                                    <div name="price" class="price">1600 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738467)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">18:00</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738468)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">19:30</div>
+                                    <div name="price" class="price">1800 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738469)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">21:00</div>
+                                    <div name="price" class="price">2000 грн</div>
+                                </div>
+                            </div>
+                                                    <div class="cell reserv-item cell-item free  " onclick="newBooking(738470)">
+                                <div class="border"></div>
+                                <div class="cell-content">
+                                    <div name="time" class="time">22:30</div>
+                                    <div name="price" class="price">2200 грн</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+            </div>
+
+    <div id="BMD" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content metro-ui">
+                <div class="modal-header">
+                    <button type="button" class="btn btn-danger btn-sm metro-ui-btn" data-dismiss="modal"
+                            aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title">Бронь: <span id="room-name-in-modal">HOTEL HOGVARTS </span></h4>
+                </div>
+                <div class="modal-body content-container"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function editBooking(bookingID) {
+            
+              $.post('/admin/booking/editinfo?get_name', {
+                _csrf: 'U1pNMC02TGZmCnVyaXQpMykIAnNLVQhRMB45VUIEHhQiE39KHWJ7Eg==',
+                id: bookingID
+            }, function (htm) {
+                $("#room-name-in-modal").text(htm);
+               
+            })
+            
+            $.post('/admin/booking/editinfo', {
+                _csrf: 'U1pNMC02TGZmCnVyaXQpMykIAnNLVQhRMB45VUIEHhQiE39KHWJ7Eg==',
+                id: bookingID
+            }, function (htm) {
+                $("#BMD .modal-body").html(htm);
+                $("#BMD").modal('show');
+            })
+        }
+
+        function newBooking(timesID) {
+            $.post('/admin/booking/createbooking', {
+                _csrf: 'U1pNMC02TGZmCnVyaXQpMykIAnNLVQhRMB45VUIEHhQiE39KHWJ7Eg==',
+                id: timesID
+            }, function (htm) {
+                $("#BMD .modal-body").html(htm);
+                $("#BMD").modal('show');
+            })
+            
+             $.post('/admin/booking/createbooking?get_name', {
+                _csrf: 'U1pNMC02TGZmCnVyaXQpMykIAnNLVQhRMB45VUIEHhQiE39KHWJ7Eg==',
+                id: timesID
+            }, function (htm) {
+                $("#room-name-in-modal").text(htm);
+               
+            })
+            
+        }
+    </script>
+</div>            </div>
+            <!-- /#page-wrapper -->
+        </div>
+        <div id="myModalBox" class="modal fade">
+            <div class="modal-dialog mymodel">
+                <div class="modal-content mymodel">
+                    <!-- Заголовок модального окна -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">File manager</h4>
+                        <div class="uploadfile">
+                            <h5>Загрузить новый файл</h5>
+                            <form id="myId" class="dropzone">
+                                <input type="hidden" name="_csrf" value="U1pNMC02TGZmCnVyaXQpMykIAnNLVQhRMB45VUIEHhQiE39KHWJ7Eg==" />
+                            </form>
+                        </div>
+                    </div>
+                    <h4 style="width: 100%;text-align: center;">Выбрать на сервере</h4 style>
+                    <!-- Основное содержимое модального окна -->
+                    <div class="modal-body mymodel" id='modalContent'>
+
+                    </div>
+                    <!-- Футер модального окна -->
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $('.confirms').click(function (event) {
+                    var url = event.toElement.href;
+                    showAlert('Подтвердите удаление <a class="btn btn-danger" href="' + url + '">Удалить</a> <button onclick="HideAlert()" class="btn btn-default">Отмена</button>', 'alert-warning');
+                    return false;
+                });
+            });
+            var inp = null;
+            var fill = null;
+            function loadFiles(inputid, fillImg,dir) {
+                inp = inputid;
+                fill = fillImg;
+                var url = "/admin/default/files";
+                if (dir)
+                    url = url+'?dir='+dir;
+                $.post(url, {_csrf: "U1pNMC02TGZmCnVyaXQpMykIAnNLVQhRMB45VUIEHhQiE39KHWJ7Eg=="})
+                        .done(function (data) {
+                            // download images to modal window
+                            images = JSON.parse(data);
+                            $("#myModalBox #modalContent").children().remove();
+                            for (var i = 0; i < images.length; i++) {
+                                $("#modalContent").append("<img src='/" + images[i] + "' width='100' height='100'\n\
+             onclick='fileSelect(\"" + images[i] + "\", \"" + inputid + "\", \"" + fillImg + "\")' class='imgmanager'>");
+                            }
+                        });
+                $("#myModalBox").modal('show');
+            }
+            function fileSelect(path, inputid, fillImg) {
+                $("#" + inputid).val('/' + path);
+                $("#myModalBox").modal('hide');
+                $('#myModalBox .imgmanager').remove();
+                $("#" + fillImg).attr('src', "/" + path);
+                if ($('#photo-gallery')) {
+                    resetJcrop();
+                }
+
+            }
+        </script>
+        <script src="/assets/3e227f6f/jquery.js"></script>
+<script src="/assets/64c67b80/yii.js"></script>
+<script src="/assets/2d08d553/jquery.pjax.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
+<script src="/assets/3378dcfc/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<script src="/assets/3378dcfc/js/dropzone.js"></script>
+<script src="/assets/3378dcfc/dist/js/sb-admin-2.js"></script>
+<script src="/assets/3378dcfc/ckeditor/ckeditor.js"></script>
+<script src="/assets/3378dcfc/datetime/DateTimePicker.js"></script>
+<script src="/assets/3378dcfc/datetime/DateTimePicker-ltie9.js"></script>
+<script src="/assets/3378dcfc/js/js.js"></script>
+<script type="text/javascript">jQuery(document).ready(function () {
+jQuery(document).pjax("#w0 a", "#w0", {"push":true,"replace":false,"timeout":1000,"scrollTo":false});
+jQuery(document).on('submit', "#w0 form[data-pjax]", function (event) {jQuery.pjax.submit(event, '#w0', {"push":true,"replace":false,"timeout":1000,"scrollTo":false});});
+});</script>        <script>
+            //$("form#myId").dropzone({ url: "/admin/default/upload", paramName:"UploadForm[imageFile]"});
+            var myDropzone = new Dropzone("form#myId", {url: "/admin/default/upload", paramName: "UploadForm[imageFile]"});
+            myDropzone.on("success", function () {
+                loadFiles(inp, fill);
+            });
+        </script>
+
+                
+    </body>
+</html>
